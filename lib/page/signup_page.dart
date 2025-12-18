@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/main.dart';
 import 'package:hitam_market/provider/password_visibility_prov.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../base/template.dart';
 
-class SiginPage extends StatelessWidget {
-  const SiginPage({super.key});
+class SignupPage extends StatelessWidget {
+  const SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +27,18 @@ class SiginPage extends StatelessWidget {
               _usernameInput(),
               const Gap(31),
               _passInput(),
-              const Gap(9),
-              _forgotPass(),
-              const Gap(52),
-              _btnLogin(),
-              const Gap(75),
+              const Gap(31),
+              _confirmPassInput(),
+              const Gap(19),
+              _terms(),
+              const Gap(38),
+              _btnCreate(),
+              const Gap(40),
               _txtOr(),
               const Gap(20),
               _trioLogin(),
               const Gap(28),
-              _signUp(context),
+              _login(context),
             ],
           ),
         ),
@@ -45,13 +46,47 @@ class SiginPage extends StatelessWidget {
     );
   }
 
-  Row _signUp(BuildContext context) {
+  RichText _terms() {
+    return RichText(
+      text: TextSpan(
+        text: "By clicking the ",
+        style: GoogleFonts.montserrat(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textHint,
+        ),
+        children: [
+          TextSpan(
+            text: "Register",
+            style: GoogleFonts.montserrat(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: AppColors.primaryDark,
+            ),
+            recognizer: TapGestureRecognizer()..onTap = () {},
+            children: [
+              TextSpan(
+                text: " button, you agree\nto the public offer ",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textHint,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row _login(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         RichText(
           text: TextSpan(
-            text: "Create An Account ",
+            text: "I Already Have an Account ",
             style: GoogleFonts.montserrat(
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -59,16 +94,17 @@ class SiginPage extends StatelessWidget {
             ),
             children: [
               TextSpan(
-                text: "Sign Up",
+                text: "Login",
                 style: GoogleFonts.montserrat(
                   decoration: TextDecoration.underline,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary,
                 ),
-                recognizer: TapGestureRecognizer()..onTap = () {
-                  Navigator.pushNamed(context, AppRoutes.signup);
-                },
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    Navigator.pop(context);
+                  },
               ),
             ],
           ),
@@ -164,7 +200,7 @@ class SiginPage extends StatelessWidget {
     );
   }
 
-  SizedBox _btnLogin() {
+  SizedBox _btnCreate() {
     return SizedBox(
       width: double.infinity,
       height: 55,
@@ -175,33 +211,11 @@ class SiginPage extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
         ),
         child: Text(
-          "Login",
+          "Create Account",
           style: GoogleFonts.montserrat(
             fontSize: 20,
             fontWeight: FontWeight.w700,
             color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container _forgotPass() {
-    return Container(
-      alignment: Alignment.topRight,
-      child: TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          minimumSize: Size.zero,
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ),
-        onPressed: () {},
-        child: Text(
-          "Forgot Password?",
-          style: GoogleFonts.montserrat(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: AppColors.primary,
           ),
         ),
       ),
@@ -246,6 +260,44 @@ class SiginPage extends StatelessWidget {
     );
   }
 
+  Consumer<PasswordVisibilityProvider> _confirmPassInput() {
+    return Consumer<PasswordVisibilityProvider>(
+      builder: (context, prov, _) => TextField(
+        obscureText: !prov.isVisible,
+        style: GoogleFonts.montserrat(),
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 11, right: 0),
+            child: Icon(Icons.lock, color: AppColors.icon, size: 24),
+          ),
+          fillColor: AppColors.bgfill,
+          filled: true,
+          suffixIcon: GestureDetector(
+            onTap: prov.toggleVisibility,
+            child: Icon(
+              prov.isVisible
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              color: AppColors.icon,
+              size: 24,
+            ),
+          ),
+
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.strokefill, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          hintText: "Confirm Password",
+          hintStyle: GoogleFonts.montserrat(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: AppColors.textHint,
+          ),
+        ),
+      ),
+    );
+  }
+
   TextField _usernameInput() {
     return TextField(
       style: GoogleFonts.montserrat(),
@@ -272,7 +324,7 @@ class SiginPage extends StatelessWidget {
 
   Text _title() {
     return Text(
-      "Welcome\nBack!",
+      "Create an\naccount",
       style: GoogleFonts.montserrat(
         fontSize: 36,
         fontWeight: FontWeight.w800,
