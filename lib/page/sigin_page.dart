@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/main.dart';
-import 'package:hitam_market/provider/password_visibility_prov.dart';
-import 'package:hitam_market/theme/app_colors.dart';
 import 'package:provider/provider.dart';
+import '../main.dart';
+import '../provider/password_visibility_prov.dart';
+import '../theme/app_colors.dart';
 import '../base/template.dart';
 
 class SiginPage extends StatelessWidget {
@@ -29,9 +29,9 @@ class SiginPage extends StatelessWidget {
               const Gap(31),
               _passInput(),
               const Gap(9),
-              _forgotPass(),
+              _forgotPass(context),
               const Gap(52),
-              _btnLogin(),
+              _btnLogin(context),
               const Gap(75),
               _txtOr(),
               const Gap(20),
@@ -164,12 +164,14 @@ class SiginPage extends StatelessWidget {
     );
   }
 
-  SizedBox _btnLogin() {
+  SizedBox _btnLogin(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 55,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, AppRoutes.getstarted);
+        },
         style: TextButton.styleFrom(
           backgroundColor: AppColors.primary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
@@ -186,7 +188,7 @@ class SiginPage extends StatelessWidget {
     );
   }
 
-  Container _forgotPass() {
+  Container _forgotPass(BuildContext context) {
     return Container(
       alignment: Alignment.topRight,
       child: TextButton(
@@ -195,7 +197,9 @@ class SiginPage extends StatelessWidget {
           minimumSize: Size.zero,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.forgotpassword);
+        },
         child: Text(
           "Forgot Password?",
           style: GoogleFonts.montserrat(

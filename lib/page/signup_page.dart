@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/provider/password_visibility_prov.dart';
-import 'package:hitam_market/theme/app_colors.dart';
 import 'package:provider/provider.dart';
+import '../provider/password_visibility_prov.dart';
+import '../theme/app_colors.dart';
 import '../base/template.dart';
 
 class SignupPage extends StatelessWidget {
