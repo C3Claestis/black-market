@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../main.dart';
 
 class OnboardingProvider extends ChangeNotifier {
   final PageController pageController = PageController();
@@ -13,7 +14,7 @@ class OnboardingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void nextPage() {
+  void nextPage(BuildContext context) {
     if (_currentIndex < totalPage - 1) {
       pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -29,5 +30,13 @@ class OnboardingProvider extends ChangeNotifier {
         curve: Curves.ease,
       );
     }
+  }
+
+  void goSigninPage(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      AppRoutes.signin,
+      (route) => false,
+    );
   }
 }
