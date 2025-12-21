@@ -11,6 +11,7 @@ class AppColors {
   static const Color secondaryDots = Color(0xFF17223B);
   
   // Background
+  static const Color bgcolor = Color(0xFFFDFDFD);
   static const Color bgfill = Color(0xFFF3F3F3);
   static const Color strokefill = Color(0xFFA8A8A9);
   static const Color secondarybgfill = Color(0xFFFA7189);  
@@ -20,6 +21,7 @@ class AppColors {
   static const Color textPrimary = Color(0xFF000000);
   static const Color textSecondary = Color(0xFFC4C4C4);
   static const Color textHint = Color(0xFF676767);
+  static const Color texthint2 = Color(0xFFBBBBBB);
 
   // Status
   static const Color success = Color(0xFF4CAF50);
