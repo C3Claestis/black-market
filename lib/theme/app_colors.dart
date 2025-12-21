@@ -9,11 +9,12 @@ class AppColors {
   // Secondary
   static const Color secondary = Color(0xFFFCF3F6);
   static const Color secondaryDots = Color(0xFF17223B);
-
+  
   // Background
   static const Color bgfill = Color(0xFFF3F3F3);
   static const Color strokefill = Color(0xFFA8A8A9);
   static const Color secondarybgfill = Color(0xFFFA7189);  
+  static const Color thirdbgfill = Color(0xFFF2F2F2);
   
   // Text
   static const Color textPrimary = Color(0xFF000000);

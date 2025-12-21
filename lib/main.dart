@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hitam_market/page/forgot_password.dart';
 import 'package:hitam_market/page/getstarted_page.dart';
+import 'package:hitam_market/page/home_page.dart';
 import 'package:hitam_market/page/signup_page.dart';
+import 'package:hitam_market/provider/home_provider.dart';
 import 'package:provider/provider.dart';
 import 'page/splash_intro_page.dart';
 import '../provider/password_visibility_prov.dart';
@@ -25,6 +27,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SplashscreenProv()),
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
       ],
       child: const MainApp(),
     ),
@@ -40,6 +43,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splash,
       routes: {
+        AppRoutes.home: (context) => const HomePage(),
         AppRoutes.splash: (context) => const SplashscreenPage(),
         AppRoutes.splashIntro: (context) => const SplashIntro(),
         AppRoutes.signin: (context) => const SiginPage(),
