@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/base/template.dart';
-import 'package:hitam_market/model/DealOfDayModel.dart';
-import 'package:hitam_market/provider/home/banner_provider.dart';
-import 'package:hitam_market/theme/app_colors.dart';
-import 'package:hitam_market/widget/dealofday_widget.dart';
 import 'package:provider/provider.dart';
+import '../base/template.dart';
+import '../model/DealOfDayModel.dart';
+import '../model/TrendingProductsModel.dart';
+import '../provider/home/banner_provider.dart';
+import '../theme/app_colors.dart';
+import '../widget/dealofday_widget.dart';
+import '../widget/trendingproducts_widget%20copy.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -53,6 +55,33 @@ class HomePage extends StatelessWidget {
         totalReview: 532,
       ),
     ];
+    final List<TrendingproductsModel> dummyTrendingProducts = [
+      TrendingproductsModel(
+        image: 'assets/images/1.jpg',
+        title: 'Women Printed Kurtav afafasfasfsafas',
+        description: 'Comfortable cotton kurta for daily wear safsaassaasasfa',
+        price: 1500,
+        originalPrice: 2500,
+        discount: 40,
+      ),
+      TrendingproductsModel(
+        image: 'assets/images/2.jpg',
+        title: 'Men Casual Shirt asfasfafasfafafafasfasfa',
+        description: 'Slim fit casual shirtcasccascsacascascasacaaca',
+        price: 1200,
+        originalPrice: 2000,
+        discount: 35,
+      ),
+      TrendingproductsModel(
+        image: 'assets/images/3.jpg',
+        title: 'Leather Handbag fasfsaasfasfafssafasfasf',
+        description: 'Premium leather handbag casca sc asc as ascasa a',
+        price: 3200,
+        originalPrice: 5000,
+        discount: 36,
+      ),
+    ];
+
     return Template(
       appBar: _appBar(),
       body: SafeArea(
@@ -78,10 +107,340 @@ class HomePage extends StatelessWidget {
                 _specialOffers(),
                 const Gap(16),
                 _flatnheels(),
+                const Gap(16),
+                _trendingProducts(),
+                const Gap(16),
+                _listTrendingProducts(dummyTrendingProducts),
+                const Gap(16),
+                _newArrivals(),
+                const Gap(16),
+                _sponserd(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Container _sponserd() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.bgcolor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              'Sponserd',
+              style: GoogleFonts.montserrat(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset('assets/images/image12.png'),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'up to 50% Off',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 15,
+                  color: AppColors.textPrimary,
+                ),
+              ],
+            ),
+          ),
+          const Gap(8),
+        ],
+      ),
+    );
+  }
+
+  Container _newArrivals() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.bgcolor,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          ClipRRect(
+            clipBehavior: Clip.hardEdge,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
+            child: Image.asset('assets/images/image10.png'),
+          ),
+          const Gap(8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'New Arrivals',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                    Text(
+                      "Summer’ 25 Collections",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: SizedBox(
+                  height: 32,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        backgroundColor: AppColors.primary,
+                        shadowColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        side: const BorderSide(
+                          color: AppColors.bgcolor,
+                          width: 1,
+                        ),
+                      ),
+                      label: Text(
+                        "View all",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.bgcolor,
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: AppColors.bgcolor,
+                      ),
+                      iconAlignment: IconAlignment.end,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Gap(16),
+        ],
+      ),
+    );
+  }
+
+  Widget _listTrendingProducts(
+    List<TrendingproductsModel> dummyTrendingProducts,
+  ) {
+    final ScrollController scrollController = ScrollController();
+
+    const double itemWidth = 170; // samakan dengan width DealofdayWidget
+    const double itemGap = 12;
+    final double scrollOffset = itemWidth + itemGap;
+
+    return SizedBox(
+      height: 228,
+      child: Stack(
+        children: [
+          // LIST
+          ListView.separated(
+            controller: scrollController,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return TrendingproductsWidget(data: dummyTrendingProducts[index]);
+            },
+            separatorBuilder: (context, index) => const Gap(itemGap),
+            itemCount: dummyTrendingProducts.length,
+          ),
+
+          // FLOATING BUTTON KANAN (RADIAL 3D)
+          Positioned(
+            right: 8,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                  scrollController.animateTo(
+                    scrollController.offset + scrollOffset,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+
+                    // 🌈 RADIAL GRADIENT (ISI BUTTON)
+                    gradient: RadialGradient(
+                      center: const Alignment(
+                        -0.3,
+                        -0.3,
+                      ), // cahaya dari kiri atas
+                      radius: 0.9,
+                      colors: [
+                        Colors.white,
+                        AppColors.texthint2.withOpacity(0.9),
+                        AppColors.texthint2,
+                      ],
+                      // stops: const [0.25, 0.6, 1.0],
+                    ),
+
+                    // ☁️ SHADOW (FLOATING)
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+
+                  // ✨ EDGE / HIGHLIGHT (EFEK 3D)
+                  child: Container(
+                    margin: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.7),
+                        width: 0.8,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.chevron_right,
+                      size: 26,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _trendingProducts() {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: AppColors.pinks,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Trending Products",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.bgcolor,
+                  ),
+                ),
+                const Gap(4),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/svgs/calender.svg'),
+                    const Gap(4),
+                    Text(
+                      "Last Date 29/02/22",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        color: AppColors.bgcolor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(4),
+                ),
+                side: BorderSide(color: AppColors.bgcolor, width: 1),
+              ),
+              label: Text(
+                "View all",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.bgfill,
+                ),
+              ),
+              icon: Icon(Icons.arrow_forward, color: AppColors.bgcolor),
+              iconAlignment: IconAlignment.end,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -159,7 +518,7 @@ class HomePage extends StatelessWidget {
                                   backgroundColor: AppColors.primary,
                                   shadowColor: Colors.transparent,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                   side: const BorderSide(
                                     color: AppColors.bgcolor,
@@ -283,16 +642,94 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  SizedBox _listDealOfTheDay(List<DealOfDayModel> dummyDealOfDay) {
+  Widget _listDealOfTheDay(List<DealOfDayModel> dummyDealOfDay) {
+    final ScrollController scrollController = ScrollController();
+
+    const double itemWidth = 170; // samakan dengan width DealofdayWidget
+    const double itemGap = 12;
+    final double scrollOffset = itemWidth + itemGap;
+
     return SizedBox(
       height: 248,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return DealofdayWidget(data: dummyDealOfDay[index]);
-        },
-        separatorBuilder: (context, index) => const Gap(12),
-        itemCount: dummyDealOfDay.length,
+      child: Stack(
+        children: [
+          // LIST
+          ListView.separated(
+            controller: scrollController,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return DealofdayWidget(data: dummyDealOfDay[index]);
+            },
+            separatorBuilder: (context, index) => const Gap(itemGap),
+            itemCount: dummyDealOfDay.length,
+          ),
+
+          // FLOATING BUTTON KANAN (RADIAL 3D)
+          Positioned(
+            right: 8,
+            top: 0,
+            bottom: 0,
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                  scrollController.animateTo(
+                    scrollController.offset + scrollOffset,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+
+                    // 🌈 RADIAL GRADIENT (ISI BUTTON)
+                    gradient: RadialGradient(
+                      center: const Alignment(
+                        -0.3,
+                        -0.3,
+                      ), // cahaya dari kiri atas
+                      radius: 0.9,
+                      colors: [
+                        Colors.white,
+                        AppColors.texthint2.withOpacity(0.9),
+                        AppColors.texthint2,
+                      ],
+                      // stops: const [0.25, 0.6, 1.0],
+                    ),
+
+                    // ☁️ SHADOW (FLOATING)
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+
+                  // ✨ EDGE / HIGHLIGHT (EFEK 3D)
+                  child: Container(
+                    margin: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.7),
+                        width: 0.8,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.chevron_right,
+                      size: 26,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -302,7 +739,7 @@ class HomePage extends StatelessWidget {
       height: 60,
       decoration: BoxDecoration(
         color: AppColors.fouthbgfill,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -352,7 +789,7 @@ class HomePage extends StatelessWidget {
                 side: BorderSide(color: AppColors.bgcolor, width: 1),
               ),
               label: Text(
-                "View All",
+                "View all",
                 style: GoogleFonts.montserrat(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,

@@ -10,6 +10,7 @@ class AppColors {
   static const Color secondary = Color(0xFFFCF3F6);
   static const Color secondaryDots = Color(0xFF17223B);
   static const Color dots = Color(0xFFFFA3B3);
+  static const Color pinks = Color(0xFFFD6E87);
   
   // Background
   static const Color bgcolor = Color(0xFFFDFDFD);
