@@ -5,7 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hitam_market/base/template.dart';
+import 'package:hitam_market/model/DealOfDayModel.dart';
+import 'package:hitam_market/provider/home/banner_provider.dart';
 import 'package:hitam_market/theme/app_colors.dart';
+import 'package:hitam_market/widget/dealofday_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,7 +21,38 @@ class HomePage extends StatelessWidget {
       bannerPageTwo(),
       bannerPageThree(),
     ];
-
+    final List<DealOfDayModel> dummyDealOfDay = [
+      DealOfDayModel(
+        image: 'assets/images/1.jpg',
+        title: 'Women Printed Kurtav afafasfasfsafas',
+        description: 'Comfortable cotton kurta for daily wear safsaassaasasfa',
+        price: 1500,
+        originalPrice: 2500,
+        discount: 40,
+        rating: 4.5,
+        totalReview: 1212,
+      ),
+      DealOfDayModel(
+        image: 'assets/images/2.jpg',
+        title: 'Men Casual Shirt asfasfafasfafafafasfasfa',
+        description: 'Slim fit casual shirtcasccascsacascascasacaaca',
+        price: 1200,
+        originalPrice: 2000,
+        discount: 35,
+        rating: 4.2,
+        totalReview: 845,
+      ),
+      DealOfDayModel(
+        image: 'assets/images/3.jpg',
+        title: 'Leather Handbag fasfsaasfasfafssafasfasf',
+        description: 'Premium leather handbag casca sc asc as ascasa a',
+        price: 3200,
+        originalPrice: 5000,
+        discount: 36,
+        rating: 4.8,
+        totalReview: 532,
+      ),
+    ];
     return Template(
       appBar: _appBar(),
       body: SafeArea(
@@ -32,16 +67,317 @@ class HomePage extends StatelessWidget {
                 const Gap(16),
                 _listBarang(),
                 const Gap(16),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: SizedBox(
-                    height: 189,
-                    child: PageView(children: bannerPages),
+                _banner(context, bannerPages),
+                const Gap(12),
+                _bannerDots(context, bannerPages.length),
+                const Gap(16),
+                _dealOfDay(),
+                const Gap(16),
+                _listDealOfTheDay(dummyDealOfDay),
+                const Gap(16),
+                _specialOffers(),
+                const Gap(16),
+                _flatnheels(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox _flatnheels() {
+    return SizedBox(
+      height: 172,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          // CONTAINER UTAMA (TIDAK DIUBAH STRUKTURNYA)
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.bgcolor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 4, top: 8, bottom: 8),
+              child: Container(
+                color: AppColors.sobgfill.withOpacity(0.3),
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/images/starmany.png',
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                      top: 16,
+                      child: SizedBox(
+                        width: 280,
+                        child: Image.asset(
+                          'assets/images/banner/chisa.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 43,
+                      right: 16,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Flat and Heels',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          Text(
+                            'Stand a chance to get rewarded',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 10,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                          const Gap(16),
+                          SizedBox(
+                            height: 32,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: ElevatedButton.icon(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                  backgroundColor: AppColors.primary,
+                                  shadowColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  side: const BorderSide(
+                                    color: AppColors.bgcolor,
+                                    width: 1,
+                                  ),
+                                ),
+                                label: Text(
+                                  "Visit now",
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.bgcolor,
+                                  ),
+                                ),
+                                icon: const Icon(
+                                  Icons.arrow_forward,
+                                  color: AppColors.bgcolor,
+                                ),
+                                iconAlignment: IconAlignment.end,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // BORDER GRADIENT KIRI (OVERLAY)
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 11,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Color(0xFFEFAD18), Color(0xFFF8D7B4)],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _specialOffers() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppColors.bgcolor,
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Image.asset('assets/images/specialoffer.png', width: 75, height: 60),
+          const Gap(24),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Special Offers",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16,
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const Gap(8),
+                    Container(
+                      alignment: Alignment.center,
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(64),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 8,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                        border: Border.all(color: AppColors.icon, width: 1),
+                      ),
+                      child: Text(
+                        '😱',
+                        style: GoogleFonts.arimo(fontSize: 10.5),
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(8),
+                Text(
+                  'We make sure you get the\noffer you need at best prices',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 12,
+                    color: AppColors.textPrimary,
                   ),
                 ),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox _listDealOfTheDay(List<DealOfDayModel> dummyDealOfDay) {
+    return SizedBox(
+      height: 248,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return DealofdayWidget(data: dummyDealOfDay[index]);
+        },
+        separatorBuilder: (context, index) => const Gap(12),
+        itemCount: dummyDealOfDay.length,
+      ),
+    );
+  }
+
+  Container _dealOfDay() {
+    return Container(
+      height: 60,
+      decoration: BoxDecoration(
+        color: AppColors.fouthbgfill,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Deal of the Day',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.bgcolor,
+                  ),
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/svgs/clock.svg'),
+                    const Gap(4),
+                    Text(
+                      '22h 55m 20s remaining',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        color: AppColors.bgcolor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadiusGeometry.circular(4),
+                ),
+                side: BorderSide(color: AppColors.bgcolor, width: 1),
+              ),
+              label: Text(
+                "View All",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.bgfill,
+                ),
+              ),
+              icon: Icon(Icons.arrow_forward, color: AppColors.bgcolor),
+              iconAlignment: IconAlignment.end,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  ClipRRect _banner(BuildContext context, List<Widget> bannerPages) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: SizedBox(
+        height: 189,
+        child: PageView(
+          onPageChanged: (value) {
+            context.read<BannerProvider>().setCurrentIndex(value);
+          },
+          children: bannerPages,
         ),
       ),
     );
@@ -265,6 +601,9 @@ class HomePage extends StatelessWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.bgcolor,
+      // 🔥 PENTING
+      scrolledUnderElevation: 0,
+      surfaceTintColor: Colors.transparent,
       elevation: 0,
       centerTitle: true,
       flexibleSpace: SafeArea(
@@ -348,13 +687,13 @@ class HomePage extends StatelessWidget {
 
         Positioned(
           top: 20,
-          right: 16,
+          right: 5,
           child: SizedBox(
             width: 180,
             height: 180,
             child: FittedBox(
               fit: BoxFit.contain,
-              child: Image.asset('assets/images/banner/changli.png'),
+              child: Image.asset('assets/images/banner/chisa.png'),
             ),
           ),
         ),
@@ -363,8 +702,32 @@ class HomePage extends StatelessWidget {
           bottom: 16,
           left: 16,
           child: ElevatedButton(
+            style:
+                ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: AppColors.bgfill,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    side: BorderSide(
+                      color: AppColors.primaryLight.withOpacity(0.8),
+                      width: 2,
+                    ),
+                  ),
+                ).copyWith(
+                  shadowColor: MaterialStateProperty.all(
+                    Colors.black.withOpacity(0.3),
+                  ),
+                ),
             onPressed: () {},
-            child: const Text('Lihat Promo'),
+            child: const Text(
+              'Lihat Promo',
+              style: TextStyle(fontWeight: FontWeight.w600, letterSpacing: 0.5),
+            ),
           ),
         ),
       ],
@@ -393,6 +756,19 @@ class HomePage extends StatelessWidget {
         ),
 
         Positioned(
+          top: 10,
+          right: -20,
+          child: SizedBox(
+            width: 180,
+            height: 180,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Image.asset('assets/images/banner/chisa2.png'),
+            ),
+          ),
+        ),
+
+        Positioned(
           bottom: 16,
           left: 16,
           right: 16,
@@ -410,14 +786,23 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _trendChip(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
+  Widget _trendChip(String text, {VoidCallback? onTap}) {
+    return Material(
+      color: AppColors.primaryLight.withOpacity(0.75),
+      borderRadius: BorderRadius.circular(20),
+      elevation: 3,
+      shadowColor: AppColors.secondaryDots,
+      child: InkWell(
         borderRadius: BorderRadius.circular(20),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+        ),
       ),
-      child: Text(text, style: const TextStyle(fontSize: 12)),
     );
   }
 
@@ -428,6 +813,19 @@ class HomePage extends StatelessWidget {
         Image.asset('assets/images/banner/banner3.jpg', fit: BoxFit.cover),
 
         Container(color: Colors.black.withOpacity(0.35)),
+
+        Positioned(
+          top: 10,
+          left: -50,
+          child: SizedBox(
+            width: 180,
+            height: 180,
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Image.asset('assets/images/banner/changli.png'),
+            ),
+          ),
+        ),
 
         Center(
           child: Column(
@@ -444,7 +842,10 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 8),
               Text(
                 "Dapatkan cashback & promo eksklusif",
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                  color: AppColors.textSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -454,12 +855,67 @@ class HomePage extends StatelessWidget {
         Positioned(
           bottom: 16,
           right: 16,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Join Sekarang'),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              gradient: const LinearGradient(
+                colors: [AppColors.bgfill, AppColors.primaryLight],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text(
+                'Join Sekarang',
+                style: TextStyle(
+                  color: AppColors.secondaryDots,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _bannerDots(BuildContext context, int total) {
+    return Consumer<BannerProvider>(
+      builder: (context, prov, _) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(total, (index) {
+            final isActive = index == prov.currentIndex;
+
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              width: isActive ? 16 : 6,
+              height: 6,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? AppColors.dots
+                    : AppColors.dots.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            );
+          }),
+        );
+      },
     );
   }
 }
