@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/model/TrendingProductsModel.dart';
+import 'package:hitam_market/model/trendingproductsModel.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 
 class TrendingproductsWidget extends StatelessWidget {

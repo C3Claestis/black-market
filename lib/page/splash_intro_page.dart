@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../theme/app_colors.dart';
 import '../provider/onboarding_provider.dart';
-import '../widget/OnboardingItem_widget.dart';
+import '../widget/onboardingItem_widget.dart';
 
 class SplashIntro extends StatelessWidget {
   const SplashIntro({super.key});

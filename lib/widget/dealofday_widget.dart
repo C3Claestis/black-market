@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/model/DealOfDayModel.dart';
+import 'package:hitam_market/model/dealofdayModel.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 
 class DealofdayWidget extends StatelessWidget {

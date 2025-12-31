@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hitam_market/base/template.dart';
+import 'package:hitam_market/page/content/shop_page.dart';
 import 'package:hitam_market/page/forgot_password_page.dart';
 import 'package:hitam_market/page/getstarted_page.dart';
 import 'package:hitam_market/page/signup_page.dart';
@@ -54,6 +55,7 @@ class MainApp extends StatelessWidget {
         AppRoutes.signup: (context) => const SignupPage(),
         AppRoutes.forgotpassword: (context) => const ForgotPasswordPage(),
         AppRoutes.getstarted: (context) => const GetstartedPage(),
+        AppRoutes.shop: (context) => const ShopPage(),
       },
     );
   }
@@ -70,4 +72,5 @@ class AppRoutes {
   static const register = "/register";
   static const forgotpassword = "/forgotpassword";
   static const profile = "/profile";
+  static const shop = "/shop";
 }

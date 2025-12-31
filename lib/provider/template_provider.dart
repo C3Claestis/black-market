@@ -13,10 +13,15 @@ class TemplateProvider extends ChangeNotifier {
   void setCenterFloatingButton(bool value) {
     centerFloatingButton = value;
     notifyListeners();
+  } 
+
+  void openShop() {
+    centerFloatingButton = true;
+    notifyListeners();
   }
 
-  void toggleCenterFloatingButton() {
-    centerFloatingButton = !centerFloatingButton;
+  void closeShop() {
+    centerFloatingButton = false;
     notifyListeners();
   }
 }

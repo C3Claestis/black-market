@@ -5,12 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../model/DealOfDayModel.dart';
-import '../../model/TrendingProductsModel.dart';
+import '../../model/dealofdayModel.dart';
+import '../../model/trendingproductsModel.dart';
 import '../../provider/home/banner_provider.dart';
 import '../../theme/app_colors.dart';
 import '../../widget/dealofday_widget.dart';
-import '../../widget/trendingproducts_widget%20copy.dart';
+import '../../widget/trending_products_widget copy.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -1044,7 +1044,8 @@ class HomePage extends StatelessWidget {
         Image.asset(
           'assets/images/banner/banner1.jpg',
           fit: BoxFit.cover,
-          cacheWidth: 1000, // Optimasi: Jangan load resolusi penuh jika file besar
+          cacheWidth:
+              1000, // Optimasi: Jangan load resolusi penuh jika file besar
         ),
 
         // Overlay gelap
