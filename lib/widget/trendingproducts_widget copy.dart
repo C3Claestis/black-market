@@ -95,7 +95,7 @@ class TrendingproductsWidget extends StatelessWidget {
                       ),
                       const Gap(4),
                       Text(
-                        data.discount.toString(),
+                        "${data.discount.toString()}% off",
                         style: GoogleFonts.montserrat(
                           fontSize: 12,
                           color: AppColors.error,

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../base/template.dart';
 import '../theme/app_colors.dart';
 import '../provider/onboarding_provider.dart';
 import '../widget/OnboardingItem_widget.dart';
@@ -17,7 +16,7 @@ class SplashIntro extends StatelessWidget {
     // 🔥 Tetap dipertahankan
     final prov = context.watch<OnboardingProvider>();
 
-    return Template(
+    return Scaffold(      
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

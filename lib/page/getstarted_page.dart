@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hitam_market/main.dart';
 import 'package:hitam_market/theme/app_colors.dart';
-import '../base/template.dart';
 
 class GetstartedPage extends StatelessWidget {
   const GetstartedPage({super.key});
@@ -19,7 +18,7 @@ class GetstartedPage extends StatelessWidget {
         statusBarIconBrightness: Brightness.light, // ICON HITAM (Android)
         statusBarBrightness: Brightness.light, // iOS
       ),
-      child: Template(
+      child: Scaffold(        
         body: SizedBox(
           width: double.infinity,
           height: double.infinity,

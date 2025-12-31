@@ -9,14 +9,13 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import '../provider/password_visibility_prov.dart';
 import '../theme/app_colors.dart';
-import '../base/template.dart';
 
 class SiginPage extends StatelessWidget {
   const SiginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Template(
+    return Scaffold(      
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),

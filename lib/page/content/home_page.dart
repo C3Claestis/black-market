@@ -5,13 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../base/template.dart';
-import '../model/DealOfDayModel.dart';
-import '../model/TrendingProductsModel.dart';
-import '../provider/home/banner_provider.dart';
-import '../theme/app_colors.dart';
-import '../widget/dealofday_widget.dart';
-import '../widget/trendingproducts_widget%20copy.dart';
+import '../../model/DealOfDayModel.dart';
+import '../../model/TrendingProductsModel.dart';
+import '../../provider/home/banner_provider.dart';
+import '../../theme/app_colors.dart';
+import '../../widget/dealofday_widget.dart';
+import '../../widget/trendingproducts_widget%20copy.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -82,41 +81,38 @@ class HomePage extends StatelessWidget {
       ),
     ];
 
-    return Template(
-      appBar: _appBar(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                _srchBar(),
-                const Gap(16),
-                _allFitur(),
-                const Gap(16),
-                _listBarang(),
-                const Gap(16),
-                _banner(context, bannerPages),
-                const Gap(12),
-                _bannerDots(context, bannerPages.length),
-                const Gap(16),
-                _dealOfDay(),
-                const Gap(16),
-                _listDealOfTheDay(dummyDealOfDay),
-                const Gap(16),
-                _specialOffers(),
-                const Gap(16),
-                _flatnheels(),
-                const Gap(16),
-                _trendingProducts(),
-                const Gap(16),
-                _listTrendingProducts(dummyTrendingProducts),
-                const Gap(16),
-                _newArrivals(),
-                const Gap(16),
-                _sponserd(),
-              ],
-            ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              _srchBar(),
+              const Gap(16),
+              _allFitur(),
+              const Gap(16),
+              _listBarang(),
+              const Gap(16),
+              _banner(context, bannerPages),
+              const Gap(12),
+              _bannerDots(context, bannerPages.length),
+              const Gap(16),
+              _dealOfDay(),
+              const Gap(16),
+              _listDealOfTheDay(dummyDealOfDay),
+              const Gap(16),
+              _specialOffers(),
+              const Gap(16),
+              _flatnheels(),
+              const Gap(16),
+              _trendingProducts(),
+              const Gap(16),
+              _listTrendingProducts(dummyTrendingProducts),
+              const Gap(16),
+              _newArrivals(),
+              const Gap(16),
+              _sponserd(),
+            ],
           ),
         ),
       ),
@@ -154,7 +150,10 @@ class HomePage extends StatelessWidget {
             child: ClipRRect(
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.circular(8),
-              child: Image.asset('assets/images/image12.png'),
+              child: Image.asset(
+                'assets/images/image12.png',
+                cacheWidth: 800, // Optimasi: Resize gambar ke memori
+              ),
             ),
           ),
           Padding(
@@ -205,7 +204,10 @@ class HomePage extends StatelessWidget {
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            child: Image.asset('assets/images/image10.png'),
+            child: Image.asset(
+              'assets/images/image10.png',
+              cacheWidth: 800, // Optimasi: Resize gambar ke memori
+            ),
           ),
           const Gap(8),
           Row(
@@ -1034,71 +1036,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: AppColors.bgcolor,
-      // 🔥 PENTING
-      scrolledUnderElevation: 0,
-      surfaceTintColor: Colors.transparent,
-      elevation: 0,
-      centerTitle: true,
-      flexibleSpace: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.strokefill.withOpacity(.2),
-                  ),
-                  child: Center(
-                    child: SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: SvgPicture.asset('assets/svgs/drawner.svg'),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              Container(
-                alignment: AlignmentDirectional.center,
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 120,
-                  height: 56,
-                  fit: BoxFit.cover,
-                ),
-              ),
-
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: const AssetImage('assets/images/Chisa.jpeg'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   //Banner Page
   Widget bannerPageOne() {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset('assets/images/banner/banner1.jpg', fit: BoxFit.cover),
+        Image.asset(
+          'assets/images/banner/banner1.jpg',
+          fit: BoxFit.cover,
+          cacheWidth: 1000, // Optimasi: Jangan load resolusi penuh jika file besar
+        ),
 
         // Overlay gelap
         Container(color: Colors.black.withOpacity(0.3)),
@@ -1175,7 +1122,11 @@ class HomePage extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset('assets/images/banner/banner2.jpg', fit: BoxFit.cover),
+        Image.asset(
+          'assets/images/banner/banner2.jpg',
+          fit: BoxFit.cover,
+          cacheWidth: 1000, // Optimasi
+        ),
 
         Container(color: Colors.black.withOpacity(0.25)),
 
@@ -1247,7 +1198,11 @@ class HomePage extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset('assets/images/banner/banner3.jpg', fit: BoxFit.cover),
+        Image.asset(
+          'assets/images/banner/banner3.jpg',
+          fit: BoxFit.cover,
+          cacheWidth: 1000, // Optimasi
+        ),
 
         Container(color: Colors.black.withOpacity(0.35)),
 

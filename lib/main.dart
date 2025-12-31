@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hitam_market/page/forgot_password.dart';
+import 'package:hitam_market/base/template.dart';
+import 'package:hitam_market/page/forgot_password_page.dart';
 import 'package:hitam_market/page/getstarted_page.dart';
-import 'package:hitam_market/page/home_page.dart';
 import 'package:hitam_market/page/signup_page.dart';
 import 'package:hitam_market/provider/home/banner_provider.dart';
 import 'package:hitam_market/provider/home/home_provider.dart';
+import 'package:hitam_market/provider/template_provider.dart';
 import 'package:provider/provider.dart';
 import 'page/splash_intro_page.dart';
 import '../provider/password_visibility_prov.dart';
@@ -25,6 +26,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => TemplateProvider()),
         ChangeNotifierProvider(create: (_) => SplashscreenProv()),
         ChangeNotifierProvider(create: (_) => OnboardingProvider()),
         ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
@@ -45,12 +47,12 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.splash,
       routes: {
-        AppRoutes.home: (context) => const HomePage(),
+        AppRoutes.home: (context) => const Template(),
         AppRoutes.splash: (context) => const SplashscreenPage(),
         AppRoutes.splashIntro: (context) => const SplashIntro(),
         AppRoutes.signin: (context) => const SiginPage(),
         AppRoutes.signup: (context) => const SignupPage(),
-        AppRoutes.forgotpassword: (context) => const ForgotPassword(),
+        AppRoutes.forgotpassword: (context) => const ForgotPasswordPage(),
         AppRoutes.getstarted: (context) => const GetstartedPage(),
       },
     );
