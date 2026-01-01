@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/model/dealofdayModel.dart';
+import 'package:hitam_market/model/dataModel.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 
-class DealofdayWidget extends StatelessWidget {
-  final DealOfDayModel data;
-  const DealofdayWidget({super.key, required this.data});
+class ListModelWidget extends StatelessWidget {
+  final bool isDealOfDay;
+  final Datamodel data;
+  const ListModelWidget({super.key, required this.data, required this.isDealOfDay});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,7 @@ class DealofdayWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // IMAGE (tanpa padding)
-            AspectRatio(
-              aspectRatio: 14 / 9,
+            Expanded(              
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Image.asset(
@@ -83,7 +83,7 @@ class DealofdayWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Row(
+                  (isDealOfDay) ? Row(
                     children: [
                       Text(
                         "₹${data.originalPrice.toString()}",
@@ -104,7 +104,7 @@ class DealofdayWidget extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
+                  ) : const Gap(0),
                   const Gap(4),
                   Row(
                     children: [

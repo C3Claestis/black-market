@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hitam_market/model/trendingproductsModel.dart';
+import 'package:hitam_market/model/dataModel.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 
 class TrendingproductsWidget extends StatelessWidget {
-  final TrendingproductsModel data;
+  final Datamodel data;
   const TrendingproductsWidget({super.key, required this.data});
 
   @override
@@ -31,8 +31,7 @@ class TrendingproductsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // IMAGE (tanpa padding)
-            AspectRatio(
-              aspectRatio: 14 / 9,
+            Expanded(              
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Image.asset(

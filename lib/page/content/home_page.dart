@@ -5,11 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../model/dealofdayModel.dart';
-import '../../model/trendingproductsModel.dart';
+import '../../model/dataModel.dart';
 import '../../provider/home/banner_provider.dart';
 import '../../theme/app_colors.dart';
-import '../../widget/dealofday_widget.dart';
+import '../../widget/list_model_widget.dart';
 import '../../widget/trending_products_widget copy.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,64 +20,6 @@ class HomePage extends StatelessWidget {
       bannerPageOne(),
       bannerPageTwo(),
       bannerPageThree(),
-    ];
-    final List<DealOfDayModel> dummyDealOfDay = [
-      DealOfDayModel(
-        image: 'assets/images/1.jpg',
-        title: 'Women Printed Kurtav afafasfasfsafas',
-        description: 'Comfortable cotton kurta for daily wear safsaassaasasfa',
-        price: 1500,
-        originalPrice: 2500,
-        discount: 40,
-        rating: 4.5,
-        totalReview: 1212,
-      ),
-      DealOfDayModel(
-        image: 'assets/images/2.jpg',
-        title: 'Men Casual Shirt asfasfafasfafafafasfasfa',
-        description: 'Slim fit casual shirtcasccascsacascascasacaaca',
-        price: 1200,
-        originalPrice: 2000,
-        discount: 35,
-        rating: 4.2,
-        totalReview: 845,
-      ),
-      DealOfDayModel(
-        image: 'assets/images/3.jpg',
-        title: 'Leather Handbag fasfsaasfasfafssafasfasf',
-        description: 'Premium leather handbag casca sc asc as ascasa a',
-        price: 3200,
-        originalPrice: 5000,
-        discount: 36,
-        rating: 4.8,
-        totalReview: 532,
-      ),
-    ];
-    final List<TrendingproductsModel> dummyTrendingProducts = [
-      TrendingproductsModel(
-        image: 'assets/images/1.jpg',
-        title: 'Women Printed Kurtav afafasfasfsafas',
-        description: 'Comfortable cotton kurta for daily wear safsaassaasasfa',
-        price: 1500,
-        originalPrice: 2500,
-        discount: 40,
-      ),
-      TrendingproductsModel(
-        image: 'assets/images/2.jpg',
-        title: 'Men Casual Shirt asfasfafasfafafafasfasfa',
-        description: 'Slim fit casual shirtcasccascsacascascasacaaca',
-        price: 1200,
-        originalPrice: 2000,
-        discount: 35,
-      ),
-      TrendingproductsModel(
-        image: 'assets/images/3.jpg',
-        title: 'Leather Handbag fasfsaasfasfafssafasfasf',
-        description: 'Premium leather handbag casca sc asc as ascasa a',
-        price: 3200,
-        originalPrice: 5000,
-        discount: 36,
-      ),
     ];
 
     return SafeArea(
@@ -99,7 +40,7 @@ class HomePage extends StatelessWidget {
               const Gap(16),
               _dealOfDay(),
               const Gap(16),
-              _listDealOfTheDay(dummyDealOfDay),
+              _listDealOfTheDay(Datamodel.dummyDataModel),
               const Gap(16),
               _specialOffers(),
               const Gap(16),
@@ -107,7 +48,7 @@ class HomePage extends StatelessWidget {
               const Gap(16),
               _trendingProducts(),
               const Gap(16),
-              _listTrendingProducts(dummyTrendingProducts),
+              _listTrendingProducts(Datamodel.dummyDataModel),
               const Gap(16),
               _newArrivals(),
               const Gap(16),
@@ -283,7 +224,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _listTrendingProducts(
-    List<TrendingproductsModel> dummyTrendingProducts,
+    List<Datamodel> dummyTrendingProducts,
   ) {
     final ScrollController scrollController = ScrollController();
 
@@ -644,7 +585,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _listDealOfTheDay(List<DealOfDayModel> dummyDealOfDay) {
+  Widget _listDealOfTheDay(List<Datamodel> dummyDealOfDay) {
     final ScrollController scrollController = ScrollController();
 
     const double itemWidth = 170; // samakan dengan width DealofdayWidget
@@ -660,7 +601,7 @@ class HomePage extends StatelessWidget {
             controller: scrollController,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return DealofdayWidget(data: dummyDealOfDay[index]);
+              return ListModelWidget(data: dummyDealOfDay[index], isDealOfDay: true,);
             },
             separatorBuilder: (context, index) => const Gap(itemGap),
             itemCount: dummyDealOfDay.length,
