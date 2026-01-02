@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hitam_market/main.dart';
 import 'package:hitam_market/model/dataModel.dart';
 import 'package:hitam_market/provider/shop/gambar_slider_provider.dart';
 import 'package:hitam_market/provider/shop/select_size_provider.dart';
@@ -41,7 +42,7 @@ class ShopPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _isiContent(_pageController, images, sizeStr, sizes),
+                _isiContent(_pageController, images, sizeStr, sizes, context),
                 const Gap(16),
                 _rowTwoBtnOptions(),
                 const Gap(20),
@@ -59,6 +60,7 @@ class ShopPage extends StatelessWidget {
     List<String> images,
     String sizeStr,
     List<String> sizes,
+    BuildContext context,
   ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -81,7 +83,7 @@ class ShopPage extends StatelessWidget {
           const Gap(4),
           _detailProduct(),
           const Gap(12),
-          _rowBtncolor(),
+          _rowBtncolor(context),
           const Gap(12),
           _delivery(),
         ],
@@ -316,78 +318,101 @@ class ShopPage extends StatelessWidget {
     );
   }
 
-  Row _rowBtncolor() {
+  Row _rowBtncolor(BuildContext context) {
     return Row(
       children: [
-        _btnCollor('Go to cart', 'cart', Color(0xFF3F92FF), Color(0xFF0B3689)),
+        _btnCollor(
+          'Go to cart',
+          'cart',
+          Color(0xFF3F92FF),
+          Color(0xFF0B3689),
+          context,
+        ),
         const Gap(8),
-        _btnCollor('Buy Now', 'touch', Color(0xFF71F9A9), Color(0xFF31B769)),
+        _btnCollor(
+          'Buy Now',
+          'touch',
+          Color(0xFF71F9A9),
+          Color(0xFF31B769),
+          context,
+        ),
       ],
     );
   }
 
-  SizedBox _btnCollor(String text, String icon, Color color1, Color color2) {
-    return SizedBox(
-      width: 136,
-      height: 40,
-      child: Stack(
-        alignment: Alignment.centerRight,
-        children: [
-          Container(
-            width: 115,
-            height: 36,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  color1, // 0%
-                  color2, // 100%
-                ],
+  Widget _btnCollor(
+    String text,
+    String icon,
+    Color color1,
+    Color color2,
+    BuildContext context,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.checkOut);
+      },
+      child: SizedBox(
+        width: 136,
+        height: 40,
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Container(
+              width: 115,
+              height: 36,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    color1, // 0%
+                    color2, // 100%
+                  ],
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Center(
+                  child: Text(
+                    text,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.bgcolor,
+                    ),
+                  ),
+                ),
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: Center(
-                child: Text(
-                  text,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+            Positioned(
+              left: 0,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    center: Alignment.center,
+                    radius: 0.6,
+                    colors: [
+                      color1, // 0% (tengah)
+                      color2, // 100% (luar)
+                    ],
+                  ),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/svgs/${icon}.svg',
+                    width: 24,
+                    height: 24,
                     color: AppColors.bgcolor,
                   ),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            left: 0,
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  center: Alignment.center,
-                  radius: 0.6,
-                  colors: [
-                    color1, // 0% (tengah)
-                    color2, // 100% (luar)
-                  ],
-                ),
-              ),
-              child: Center(
-                child: SvgPicture.asset(
-                  'assets/svgs/${icon}.svg',
-                  width: 24,
-                  height: 24,
-                  color: AppColors.bgcolor,
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

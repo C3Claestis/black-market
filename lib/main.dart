@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hitam_market/base/template.dart';
-import 'package:hitam_market/page/content/shop_page.dart';
-import 'package:hitam_market/page/forgot_password_page.dart';
-import 'package:hitam_market/page/getstarted_page.dart';
-import 'package:hitam_market/page/signup_page.dart';
-import 'package:hitam_market/provider/home/banner_provider.dart';
-import 'package:hitam_market/provider/home/home_provider.dart';
-import 'package:hitam_market/provider/template_provider.dart';
+import 'package:hitam_market/page/payment/checkout_page.dart';
 import 'package:provider/provider.dart';
 import 'page/splash_intro_page.dart';
+import '../base/template.dart';
+import '../page/content/shop_page.dart';
+import '../page/forgot_password_page.dart';
+import '../page/getstarted_page.dart';
+import '../page/signup_page.dart';
+import '../provider/home/banner_provider.dart';
+import '../provider/home/home_provider.dart';
+import '../provider/template_provider.dart';
 import '../provider/password_visibility_prov.dart';
 import '../page/sigin_page.dart';
 import '../provider/onboarding_provider.dart';
@@ -56,6 +57,7 @@ class MainApp extends StatelessWidget {
         AppRoutes.forgotpassword: (context) => const ForgotPasswordPage(),
         AppRoutes.getstarted: (context) => const GetstartedPage(),
         AppRoutes.shop: (context) => const ShopPage(),
+        AppRoutes.checkOut: (context) => CheckoutPage(),
       },
     );
   }
@@ -73,4 +75,5 @@ class AppRoutes {
   static const forgotpassword = "/forgotpassword";
   static const profile = "/profile";
   static const shop = "/shop";
+  static const checkOut = "/checkout";
 }
