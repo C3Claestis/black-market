@@ -1,3 +1,5 @@
 {
-    "cmake.sourceDirectory": "C:/Users/bhuuh/OneDrive/Desktop/black-market/linux"
+    "cmake.sourceDirectory": "C:/Users/bhuuh/OneDrive/Desktop/black-market/linux",
+    "chat.useClaudeSkills": false,
+    "chat.useNestedAgentsMdFiles": false
 }

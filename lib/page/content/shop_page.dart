@@ -349,7 +349,7 @@ class ShopPage extends StatelessWidget {
   ) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, AppRoutes.checkOut);
+        Navigator.pushNamed(context, AppRoutes.placeOrder);
       },
       child: SizedBox(
         width: 136,
