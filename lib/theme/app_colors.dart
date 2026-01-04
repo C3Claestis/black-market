@@ -20,7 +20,8 @@ class AppColors {
   static const Color thirdbgfill = Color(0xFFF2F2F2);
   static const Color fouthbgfill = Color(0xFF4392F9);
   static const Color sobgfill = Color(0xFFE7E7EB);
-  static const Color deliveryBg = Color(0xFFFFCCD5);  
+  static const Color deliveryBg = Color(0xFFFFCCD5); 
+  static const Color bottomSheet = Color(0xFFF8F8F8);  
   
   // Text
   static const Color textPrimary = Color(0xFF000000);
