@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hitam_market/main.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 import 'package:hitam_market/widget/checkout_card_widget.dart';
 
@@ -13,8 +14,7 @@ class CheckoutPage extends StatelessWidget {
   final ScrollController controller = ScrollController();
 
   @override
-  Widget build(BuildContext context) {    
-
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgcolor,
       appBar: _appBar(context),
@@ -171,6 +171,36 @@ class CheckoutPage extends StatelessWidget {
                     },
                     separatorBuilder: (context, index) => const Gap(12),
                     itemCount: 10,
+                  ),
+                ),
+              ),
+            ),
+            const Gap(24),
+            // ===== BUTTON (FIXED BOTTOM) =====
+            SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(22, 12, 22, 16),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.shipping),
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      'Proceed to Payment',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.bgcolor,
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hitam_market/main.dart';
 import 'package:hitam_market/theme/app_colors.dart';
 
 class PlaceOrderPage extends StatelessWidget {
@@ -70,7 +71,7 @@ class PlaceOrderPage extends StatelessWidget {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, AppRoutes.checkOut),
                   style: TextButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     padding: const EdgeInsets.symmetric(

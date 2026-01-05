@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hitam_market/page/payment/checkout_page.dart';
 import 'package:hitam_market/page/payment/place_order_page.dart';
+import 'package:hitam_market/page/payment/shipping_page.dart';
 import 'package:provider/provider.dart';
 import 'page/splash_intro_page.dart';
 import '../base/template.dart';
@@ -59,7 +60,8 @@ class MainApp extends StatelessWidget {
         AppRoutes.getstarted: (context) => const GetstartedPage(),
         AppRoutes.shop: (context) => const ShopPage(),
         AppRoutes.checkOut: (context) => CheckoutPage(),   
-        AppRoutes.placeOrder: (context) => PlaceOrderPage(),     
+        AppRoutes.placeOrder: (context) => PlaceOrderPage(),  
+        AppRoutes.shipping: (context) => const ShippingPage(),   
       },
     );
   }
@@ -79,4 +81,5 @@ class AppRoutes {
   static const shop = "/shop";
   static const checkOut = "/checkout";
   static const placeOrder = "/placeorder";
+  static const shipping = "/shipping";
 }
